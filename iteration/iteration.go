@@ -1,8 +1,7 @@
 package iteration
 
+import "strings"
+
 func Repeat(c string, r int) (repeated string) {
-	for i := 0; i < r; i++ {
-		repeated += c
-	}
-	return
+	return strings.Repeat(c, r)
 }
