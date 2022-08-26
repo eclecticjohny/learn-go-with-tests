@@ -19,9 +19,9 @@ type Circle struct {
 type Triangle struct {
 	Base   float64
 	Height float64
-	Side1  float64
-	Side2  float64
-	Side3  float64
+	SideA  float64
+	SideB  float64
+	SideC  float64
 }
 
 // Perimeter returns the perimeter of a rectangle.
@@ -46,7 +46,7 @@ func (c Circle) Area() float64 {
 
 // Perimeter returns the perimeter of a triangle.
 func (t Triangle) Perimeter() float64 {
-	return t.Side1 + t.Side2 + t.Side3
+	return t.SideA + t.SideB + t.SideC
 }
 
 // Area returns the area of a triangle.
