@@ -1,4 +1,4 @@
-package wallet
+package main
 
 import (
 	"errors"
@@ -36,4 +36,24 @@ func (w *Wallet) Withdraw(amount Bitcoin) error {
 
 	w.balance -= amount
 	return nil
+}
+
+func main() {
+	wallet := Wallet{balance: Bitcoin(0)}
+	fmt.Println("Initial balance: ", wallet.Balance())
+
+	wallet.Deposit(Bitcoin(10))
+	fmt.Println("After deposit balance: ", wallet.Balance())
+
+	err := wallet.Withdraw(Bitcoin(100))
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println("After overdraw balance: ", wallet.Balance())
+
+	err = wallet.Withdraw(Bitcoin(5))
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println("After withdraw balance: ", wallet.Balance())
 }

@@ -1,4 +1,6 @@
-package maps
+package main
+
+import "fmt"
 
 type Dictionary map[string]string
 type DictionaryErr string
@@ -55,4 +57,20 @@ func (d Dictionary) Update(word, definition string) error {
 
 func (d Dictionary) Delete(word string) {
 	delete(d, word)
+}
+
+func main() {
+	dictionary := Dictionary{
+		"hello": "world",
+	}
+	fmt.Println(dictionary)
+
+	dictionary.Add("bye", "world")
+	fmt.Println(dictionary)
+
+	dictionary.Update("hello", "universe")
+	fmt.Println(dictionary)
+
+	dictionary.Delete("bye")
+	fmt.Println(dictionary)
 }

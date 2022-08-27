@@ -1,6 +1,9 @@
-package shapes
+package main
 
-import "math"
+import (
+	"fmt"
+	"math"
+)
 
 type Shape interface {
 	Perimeter() float64
@@ -52,4 +55,18 @@ func (t Triangle) Perimeter() float64 {
 // Area returns the area of a triangle.
 func (t Triangle) Area() float64 {
 	return (t.Base * t.Height) / 2
+}
+
+func main() {
+	r := Rectangle{Width: 3, Height: 4}
+	fmt.Println("Rectangle Perimeter: ", r.Perimeter())
+	fmt.Println("Rectangle Area: ", r.Area())
+
+	c := Circle{Radius: 5}
+	fmt.Println("Circle Perimeter: ", c.Perimeter())
+	fmt.Println("Circle Area: ", c.Area())
+
+	t := Triangle{Base: 3, Height: 4, SideA: 3, SideB: 4, SideC: 5}
+	fmt.Println("Triangle Perimeter: ", t.Perimeter())
+	fmt.Println("Triangle Area: ", t.Area())
 }

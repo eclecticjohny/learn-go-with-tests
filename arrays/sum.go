@@ -1,4 +1,6 @@
-package arraysandslices
+package main
+
+import "fmt"
 
 // Sum returns the sum of all numbers in a slice.
 func Sum(numbers []int) (sum int) {
@@ -30,4 +32,10 @@ func SumAllTails(numbersToSum ...[]int) (sums []int) {
 	}
 
 	return
+}
+
+func main() {
+	fmt.Println(Sum([]int{1, 2, 3}))
+	fmt.Println(SumAll([]int{1, 2}, []int{0, 9}))
+	fmt.Println(SumAllTails([]int{1, 2}, []int{0, 9}))
 }
