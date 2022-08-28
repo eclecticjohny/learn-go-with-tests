@@ -60,7 +60,7 @@ func TestWalk(t *testing.T) {
 					Country: "US",
 				},
 			},
-			ExpectedCalls: []string{"Chris", "DC", "US"},
+			ExpectedCalls: []string{"John", "Johny", "DC", "US"},
 		},
 	}
 	for _, test := range cases {
