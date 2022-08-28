@@ -5,6 +5,19 @@ import (
 	"testing"
 )
 
+type Person struct {
+	Name     string
+	Nickname string
+	Age      int
+	Contact  ContactInfo
+}
+
+type ContactInfo struct {
+	Zip     int
+	City    string
+	Country string
+}
+
 func TestWalk(t *testing.T) {
 	cases := []struct {
 		Name          string
@@ -13,45 +26,35 @@ func TestWalk(t *testing.T) {
 	}{
 		{
 			Name: "Struct with one string field",
-			Input: struct {
-				Name string
-			}{Name: "Chris"},
-			ExpectedCalls: []string{"Chris"},
+			Input: Person{
+				Name: "John",
+			},
+			ExpectedCalls: []string{"John"},
 		},
 		{
 			Name: "Struct with two string fields",
-			Input: struct {
-				Name string
-				City string
-			}{Name: "Chris", City: "London"},
-			ExpectedCalls: []string{"Chris", "London"},
+			Input: Person{
+				Name:     "John",
+				Nickname: "Johny",
+			},
+			ExpectedCalls: []string{"John", "Johny"},
 		},
 		{
 			Name: "Struct with non string field",
-			Input: struct {
-				Name string
-				Age  int
-			}{Name: "Chris", Age: 30},
-			ExpectedCalls: []string{"Chris"},
+			Input: Person{
+				Name:     "John",
+				Nickname: "Johny",
+				Age:      99,
+			},
+			ExpectedCalls: []string{"John", "Johny"},
 		},
 		{
 			Name: "Nested fields",
-			Input: struct {
-				Name    string
-				Age     int
-				Contact struct {
-					Zip     int
-					City    string
-					Country string
-				}
-			}{
-				Name: "Chris",
-				Age:  30,
-				Contact: struct {
-					Zip     int
-					City    string
-					Country string
-				}{
+			Input: Person{
+				Name:     "John",
+				Nickname: "Johny",
+				Age:      99,
+				Contact: ContactInfo{
 					Zip:     20001,
 					City:    "DC",
 					Country: "US",
