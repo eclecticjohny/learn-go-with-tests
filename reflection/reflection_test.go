@@ -102,6 +102,32 @@ func TestWalk(t *testing.T) {
 			},
 			ExpectedCalls: []string{"John", "Johny", "DC", "US", "Reg", "Reggie", "DC", "US"},
 		},
+		{
+			Name: "Arrays",
+			Input: [2]Person{
+				{
+					Name:     "John",
+					Nickname: "Johny",
+					Age:      99,
+					Contact: ContactInfo{
+						Zip:     20001,
+						City:    "DC",
+						Country: "US",
+					},
+				},
+				{
+					Name:     "Reg",
+					Nickname: "Reggie",
+					Age:      99,
+					Contact: ContactInfo{
+						Zip:     20001,
+						City:    "DC",
+						Country: "US",
+					},
+				},
+			},
+			ExpectedCalls: []string{"John", "Johny", "DC", "US", "Reg", "Reggie", "DC", "US"},
+		},
 	}
 	for _, test := range cases {
 		t.Run(test.Name, func(t *testing.T) {
