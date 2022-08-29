@@ -128,15 +128,8 @@ func TestWalk(t *testing.T) {
 			},
 			ExpectedCalls: []string{"John", "Johny", "DC", "US", "Reg", "Reggie", "DC", "US"},
 		},
-		{
-			Name: "Maps",
-			Input: map[string]string{
-				"Baz": "Boz",
-				"Foo": "Bar",
-			},
-			ExpectedCalls: []string{"Bar", "Boz"},
-		},
 	}
+
 	for _, test := range cases {
 		t.Run(test.Name, func(t *testing.T) {
 			var got []string
@@ -160,6 +153,39 @@ func TestWalk(t *testing.T) {
 		})
 		assertContains(t, got, "Bar")
 		assertContains(t, got, "Boz")
+	})
+
+	t.Run("with channels", func(t *testing.T) {
+		aChannel := make(chan string)
+
+		go func() {
+			aChannel <- "foo"
+			aChannel <- "bar"
+			close(aChannel)
+		}()
+
+		var got []string
+
+		walk(aChannel, func(input string) {
+			got = append(got, input)
+		})
+
+		assertContains(t, got, "bar")
+		assertContains(t, got, "foo")
+	})
+
+	t.Run("with functions", func(t *testing.T) {
+		aFunction := func() (string, string) {
+			return "foo", "bar"
+		}
+		var got []string
+
+		walk(aFunction, func(input string) {
+			got = append(got, input)
+		})
+
+		assertContains(t, got, "foo")
+		assertContains(t, got, "bar")
 	})
 }
 
