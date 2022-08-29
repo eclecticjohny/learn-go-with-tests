@@ -128,6 +128,14 @@ func TestWalk(t *testing.T) {
 			},
 			ExpectedCalls: []string{"John", "Johny", "DC", "US", "Reg", "Reggie", "DC", "US"},
 		},
+		{
+			Name: "Maps",
+			Input: map[string]string{
+				"Foo": "Bar",
+				"Baz": "Boz",
+			},
+			ExpectedCalls: []string{"Bar", "Boz"},
+		},
 	}
 	for _, test := range cases {
 		t.Run(test.Name, func(t *testing.T) {
