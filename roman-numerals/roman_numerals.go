@@ -2,12 +2,12 @@ package main
 
 import "strings"
 
-type RomanNumeral struct {
-	Value  int
-	Symbol string
+type ArabicRoman struct {
+	Arabic int
+	Roman  string
 }
 
-var rns = []RomanNumeral{
+var rns = []ArabicRoman{
 	{1000, "M"},
 	{900, "CM"},
 	{500, "D"},
@@ -26,10 +26,10 @@ var rns = []RomanNumeral{
 func ArabicToRoman(a int) string {
 	var result strings.Builder
 
-	for _, rn := range rns {
-		for a >= rn.Value {
-			result.WriteString(rn.Symbol)
-			a -= rn.Value
+	for _, ar := range rns {
+		for a >= ar.Arabic {
+			result.WriteString(ar.Roman)
+			a -= ar.Arabic
 		}
 	}
 

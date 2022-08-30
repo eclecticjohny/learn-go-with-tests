@@ -6,10 +6,7 @@ import (
 )
 
 func TestRomanNumerals(t *testing.T) {
-	cases := []struct {
-		Arabic int
-		Roman  string
-	}{
+	cases := []ArabicRoman{
 		{1, "I"},
 		{2, "II"},
 		{3, "III"},
