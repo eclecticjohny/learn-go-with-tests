@@ -23,7 +23,7 @@ var rns = []RomanNumeral{
 	{1, "I"},
 }
 
-func ConvertToRoman(a int) string {
+func ArabicToRoman(a int) string {
 	var result strings.Builder
 
 	for _, rn := range rns {
