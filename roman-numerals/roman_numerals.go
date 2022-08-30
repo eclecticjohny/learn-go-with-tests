@@ -7,7 +7,12 @@ type ArabicRoman struct {
 	Roman  string
 }
 
-var rns = []ArabicRoman{
+type RomanArabic struct {
+	Roman  string
+	Arabic int
+}
+
+var ars = []ArabicRoman{
 	{1000, "M"},
 	{900, "CM"},
 	{500, "D"},
@@ -23,10 +28,20 @@ var rns = []ArabicRoman{
 	{1, "I"},
 }
 
+var ras = map[byte]int{
+	'I': 1,
+	'V': 5,
+	'X': 10,
+	'L': 50,
+	'C': 100,
+	'D': 500,
+	'M': 1000,
+}
+
 func ArabicToRoman(a int) string {
 	var result strings.Builder
 
-	for _, ar := range rns {
+	for _, ar := range ars {
 		for a >= ar.Arabic {
 			result.WriteString(ar.Roman)
 			a -= ar.Arabic
@@ -34,4 +49,28 @@ func ArabicToRoman(a int) string {
 	}
 
 	return result.String()
+}
+
+func RomanToArabic(r string) int {
+	length := len(r)
+
+	if length == 0 {
+		return 0
+	}
+
+	if length == 1 {
+		return ras[r[0]]
+	}
+
+	sum := ras[r[length-1]]
+
+	for i := length - 2; i >= 0; i-- {
+		if ras[r[i]] < ras[r[i+1]] {
+			sum -= ras[r[i]]
+		} else {
+			sum += ras[r[i]]
+		}
+	}
+
+	return sum
 }
