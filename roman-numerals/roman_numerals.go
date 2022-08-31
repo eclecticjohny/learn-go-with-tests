@@ -3,11 +3,11 @@ package main
 import "strings"
 
 type ArabicRoman struct {
-	Arabic int
+	Arabic uint16
 	Roman  string
 }
 
-func ArabicToRoman(a int) string {
+func ArabicToRoman(a uint16) string {
 	ars := []ArabicRoman{
 		{1000, "M"},
 		{900, "CM"},
@@ -36,8 +36,8 @@ func ArabicToRoman(a int) string {
 	return result.String()
 }
 
-func RomanToArabic(r string) int {
-	ras := map[byte]int{
+func RomanToArabic(r string) uint16 {
+	ras := map[byte]uint16{
 		'I': 1,
 		'V': 5,
 		'X': 10,

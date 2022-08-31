@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"testing"
+	"testing/quick"
 )
 
 var cases = []ArabicRoman{
@@ -52,5 +53,17 @@ func TestRomanToArabic(t *testing.T) {
 				t.Errorf("got %d, want %d", got, test.Arabic)
 			}
 		})
+	}
+}
+
+func TestPropertiesOfConversion(t *testing.T) {
+	assertion := func(arabic uint16) bool {
+		roman := ArabicToRoman(arabic)
+		fromRoman := RomanToArabic(roman)
+		return fromRoman == arabic
+	}
+
+	if err := quick.Check(assertion, &quick.Config{MaxCount: 1000}); err != nil {
+		t.Error("failed checks", err)
 	}
 }
